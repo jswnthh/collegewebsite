@@ -1,0 +1,168 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+
+    <title>DBCC BCA</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <!-- CTA -->
+    <section class="cta-container">
+        <div class="cta-inner">
+            <p class="cta-text">
+                Have something worth sharing? A blog post, research update, or photos from an event?
+                Send it to <em>jaswanth@dbcc.edu.in</em>. <br><br>
+                It may not change the world but it might make the website look interesting.
+            </p>
+
+            <!-- <h3>Contribute to the <em>Department Website</em></h3> -->
+
+        </div>
+    </section>
+
+    <div class="page-container">
+
+        <!-- NAVBAR -->
+        <!-- <header class="nav-container">
+            <div class="nav-inner">
+
+                <div class="logo">
+                    <h2>Department of Computer Applications</h2>
+                </div>
+
+                <nav class="nav-links">
+                    <a href="{% url 'core:index' %}">Home</a>
+
+                    <a href="#">Gallery</a>
+                    <a href="#">Contact</a>
+                </nav>
+
+            </div>
+        </header> -->
+
+
+        <!-- HERO -->
+        <section class="hero-container">
+            <div class="hero-inner">
+
+                <div class="hero-text">
+                    <span class="hero-label">Est. 2026 — Research Division</span>
+                    <h1>Welcome<br>to the<br><em>Department of Computer Applications</em></h1>
+                    <p class="hero-sub">Innovation &nbsp;•&nbsp; Research &nbsp;•&nbsp; Learning</p>
+                    <button>Explore →</button>
+                </div>
+
+                <div class="hero-index">
+                    <div class="hero-index-item">Research</div>
+                    <div class="hero-index-item">Publications</div>
+                    <div class="hero-index-item">Events</div>
+                    <div class="hero-index-item">People</div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- BLOG -->
+        <section class="blog-container">
+            <div class="blog-inner">
+
+                <div class="section-header">
+                    <h2>Latest Posts</h2>
+                    <span>{{ recent_posts|length }} Articles</span>
+                </div>
+
+                <div class="blog-grid">
+
+                    {% for post in recent_posts %}
+                    <div class="blog-card">
+                        <span class="card-num">00{{ forloop.counter }}</span>
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.author }}</p>
+                        <p>{{ post.excerpt }}</p>
+                        <a href="{% url 'core:blog_detail' post.slug %}">Read More →</a>
+                    </div>
+                    {% empty %}
+                    <p>No posts yet.</p>
+                    {% endfor %}
+
+                </div>
+
+                <div class="overlay" id="blog-overlay">
+                    <div class="overlay-content">
+                        <h2>All Posts</h2>
+                        <button class="btn" id="close-overlay-btn">Close</button>
+                    </div>
+                    {% for post in all_posts %}
+                    <div class="overlay-blog-card">
+                        <span class="card-num">00{{ forloop.counter }}</span>
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.author }}</p>
+                        <p>{{ post.excerpt }}</p>
+                        <a href="{% url 'core:blog_detail' post.slug %}">Read More →</a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="section-footer">
+                    <a class="btn" href="{% url 'blog:blog_page' %}">View All Posts</a>
+                </div>
+               
+
+
+            </div>
+        </section>
+
+
+        <!-- GALLERY -->
+        <section class="gallery-container">
+            <div class="gallery-inner">
+
+                <div class="section-header">
+                    <h2>Gallery</h2>
+                    <span>04 Images</span>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-num="IMG — 001"></div>
+                    <div class="gallery-item" data-num="IMG — 002"></div>
+                    <div class="gallery-item" data-num="IMG — 003"></div>
+                    <div class="gallery-item" data-num="IMG — 004"></div>
+                </div>
+                <div class="section-footer">
+                    <a class="btn" href="{% url 'gallery:gallery_page' %}">View All Images</a>
+                </div>
+
+            </div>
+        </section>
+
+
+
+
+        <!-- FOOTER -->
+        <footer class="footer-container">
+            <div class="footer-inner">
+                <p>© 2026 Department of Computer Applications</p>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

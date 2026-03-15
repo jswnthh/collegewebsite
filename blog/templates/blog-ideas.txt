@@ -1,0 +1,35 @@
+On Building Systems That Last
+A deep dive into the architectural principles that separate brittle prototypes from robust production systems. What makes infrastructure survive contact with reality.
+
+The Hidden Cost of Abstractions
+Every layer of abstraction has a price. Understanding when to pay it and when to go raw.
+
+Constraints as Creative Tools
+Limitation is not the enemy of creativity. It is the condition under which real creativity happens.
+
+Zero-Downtime Deployments
+A practical guide to shipping without fear. Blue-green, canary, and the cases where you should just cut over.
+
+Measuring What Matters
+Metrics are a lens, not a mirror. How we choose what to count shapes what we build — and what we ignore.
+
+Department Summit 2026 Recap
+Three days, forty talks, one recurring theme: the gap between what we build and what people actually need.
+
+Write Boring Code
+The most impressive engineers write the most boring code. Predictability is a feature, not a failure of imagination.
+
+The Epistemics of Estimation
+Why engineers systematically underestimate, what it costs us, and a handful of techniques that actually help. Confidence intervals are not a cop-out.
+
+Typography Is Infrastructure
+Font choices compound. Make them deliberately or pay the debt later.
+
+Open Lab Day — January
+Notes and observations from our quarterly open-door session with students and the public.
+
+Database Migrations Without Fear
+Schema changes are where confidence goes to die. A systematic approach to making them boring and safe.
+
+When Whitespace Does the Work
+Empty space is not wasted space. Learning to let a layout breathe is the hardest skill in visual design.

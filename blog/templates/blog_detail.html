@@ -1,0 +1,137 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }} — Department of Computer Applications Website</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+
+    <div class="page-container">
+
+        <!-- NAVBAR -->
+        <header class="nav-container">
+            <div class="nav-inner">
+
+                <div class="logo">
+                    <h2>Department of Computer Applications</h2>
+                </div>
+
+                <nav class="nav-links">
+                    <a href="{% url 'core:index' %}">Home</a>
+                    <a href="#">Gallery</a>
+                    <a href="#">Contact</a>
+                </nav>
+
+            </div>
+        </header>
+
+
+        <!-- ARTICLE -->
+        <section class="article-container">
+            <div class="article-inner">
+
+                <!-- Header band: title + meta sidebar -->
+                <div class="article-header">
+                    <div class="article-header-main">
+                        <h1>{{ post.title }}</h1>
+                        <div class="article-meta-sidebar">
+                            <div class="meta-row">
+                                <span class="meta-label">Published</span>
+                                <span class="meta-value">{{ post.created_at|date:"d M Y" }}</span>
+                            </div>
+                            <div class="meta-row">
+                                <span class="meta-label">Author</span>
+                                <span class="meta-value">{{ post.author }}</span>
+                            </div>
+                            <!-- <div class="meta-row">
+                                <span class="meta-label">Section</span>
+                                <span class="meta-value">Research</span>
+                            </div> -->
+                            <!-- <div class="meta-row">
+                                <span class="meta-label">Slug</span>
+                                <span class="meta-value">{{ post.slug }}</span>
+                            </div> -->
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+                <!-- Body + sidebar -->
+                <div class="article-body-wrap">
+
+                    <article class="article-body">
+
+                        {% if post.image %}
+                        <div class="article-image">
+                            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                        </div>
+                        {% endif %}
+
+                        {% if post.excerpt %}
+                        <p class="article-excerpt">{{ post.excerpt }}</p>
+                        {% endif %}
+
+                        <div class="article-content">
+                            {{ post.content|safe }}
+                        </div>
+
+                    </article>
+
+                    <aside class="article-sidebar">
+
+                        <div class="sidebar-section">
+                            <span class="sidebar-label">Topics</span>
+                            <a href="#" class="sidebar-tag">Research</a>
+                            <a href="#" class="sidebar-tag">Department of Computer Applications</a>
+                            <a href="#" class="sidebar-tag">2026</a>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <span class="sidebar-label">Related Posts</span>
+                            {% for related in related_posts %}
+                            <a href="#" class="related-link">{{ related.title }}</a>
+                            {% empty %}
+                            {% endfor %}
+                        </div>
+
+                        <div class="sidebar-section">
+                            <span class="sidebar-label">Share</span>
+                            <a href="#" class="share-btn">↗ Copy Link</a>
+                            <a href="#" class="share-btn">↗ Email</a>
+                        </div>
+
+                    </aside>
+
+                </div>
+                <!-- /article-body-wrap -->
+
+            </div>
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="footer-container">
+            <div class="footer-inner">
+                <p>© 2026 Department of Computer Applications Website</p>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
