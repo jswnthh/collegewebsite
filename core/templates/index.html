@@ -23,7 +23,7 @@
             &nbsp; Department of Computer Applications, DBCC &nbsp;&nbsp;&nbsp;★ &nbsp; We don't just study computers.
             We bicker with them. &nbsp;&nbsp;&nbsp;★ &nbsp; Got something worth sharing? Send it to jaswanth@dbcc.edu.in
             &nbsp;&nbsp;&nbsp;★ &nbsp; Department of Computer Applications, DBCC &nbsp;&nbsp;&nbsp;★ &nbsp; We don't
-            just study computers. We fight with them. &nbsp;&nbsp;&nbsp;
+            just study computers. We argue with them. &nbsp;&nbsp;&nbsp;
         </span>
     </div>
 
@@ -53,7 +53,7 @@
                         <span style="display: inline-block; margin: 1rem;">ᕦ⁠⊙⁠෴⁠⊙⁠ᕤ<br></span>
                     </h1>
                     <p class="hero-sub">
-                        Officially: Bachelor of Computer Applications.<br>
+                        Officially: Bachelors' of Computer Applications.<br>
                         Unofficially: a group of people who spend too much time learning about code and not enough time
                         doing it. You'll fit right in or you won't, and that's also fine.
                     </p>
@@ -142,6 +142,85 @@
 
             <div class="blog-grid-cta">
                 <a href="{% url 'gallery:gallery_page' %}" class="btn">View All Images →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL FOR SUBMISSIONS -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Open Calls</h2>
+                <span class="section-count">Submit or regret it</span>
+            </div>
+
+            <div class="submissions-grid">
+
+                <!-- CALL FOR BLOGS -->
+                <div class="submission-col">
+                    <div class="submission-col-header">
+                        <span class="col-title">Call for Blogs</span>
+                        <span class="col-type">✍ Writing</span>
+                    </div>
+
+                    <div class="submission-cards-track">
+                        <!-- EVERGREEN: always shown, always at the top -->
+                        <div class="submission-card" style="background: var(--evergreen); color: var(--bone);">
+                            <div class="submission-card-title" style="color: var(--bone);">Write About Anything You're
+                                Obsessed With</div>
+                            <p class="submission-card-desc" style="color: #a8c4b0;">Hobbies, side projects, a game you
+                                can't stop playing, a place you keep going back to. If you care about it enough to talk
+                                about it for 10 minutes, it's worth 500 words.</p>
+                            <div class="submission-card-meta">
+                                <div class="submission-meta-row">
+                                    <span class="meta-key" style="color: #6dbd8a;">Type</span>
+                                    <span class="meta-val" style="color: var(--bone);">Always Open</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="submission-card" style="background: var(--evergreen); color: var(--bone);">
+                            <div class="submission-card-title" style="color: var(--bone);">Write About Where You're From
+                            </div>
+                            <p class="submission-card-desc" style="color: #a8c4b0;">Your street, your town, your college
+                                canteen. Local stuff. The things that don't make it into textbooks but absolutely
+                                should.</p>
+                            <div class="submission-card-meta">
+                                <div class="submission-meta-row">
+                                    <span class="meta-key" style="color: #6dbd8a;">Type</span>
+                                    <span class="meta-val" style="color: var(--bone);">Always Open</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% for call in call_for_blogs %}
+                        <div class="submission-card">
+                            <div class="submission-card-title">{{ call.title }}</div>
+                            <p class="submission-card-desc">{{ call.description }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="swipe-hint">Swipe for more →</div>
+                <!-- CALL FOR IMAGES -->
+                <div class="submission-col">
+                    <div class="submission-col-header">
+                        <span class="col-title">Call for Images</span>
+                        <span class="col-type">⬡ Photos</span>
+                    </div>
+
+                    {% for call in call_for_images %}
+                    <div class="submission-card">
+                        <div class="submission-card-title">{{ call.title }}</div>
+                        <p class="submission-card-desc">{{ call.description }}</p>
+                    </div>
+                    {% empty %}
+                    <div class="submission-empty">
+                        We don't have an official call for images right now, but if you have photos from a department
+                        event, a trip, or just a random Tuesday that turned into something worth sharing, send it over.
+                    </div>
+                    {% endfor %}
+                </div>
+
             </div>
         </div>
     </section>
