@@ -1,166 +1,180 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    {% load static %}
-
-    <title>DBCC BCA</title>
-
+    <title>BCA — Don't Sleep on Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
-    <!-- CTA -->
-    <section class="cta-container">
-        <div class="cta-inner">
-            <p class="cta-text">
-                Have something worth sharing? A blog post, research update, or photos from an event?
-                Send it to <em>jaswanth@dbcc.edu.in</em>. <br><br>
-                It may not change the world but it might make the website look interesting.
-            </p>
 
-            <!-- <h3>Contribute to the <em>Department Website</em></h3> -->
+    <!-- ANNOUNCE BAR -->
+    <div class="announce-bar">
+        <span class="announce-track">
+            &nbsp;&nbsp;&nbsp;★ &nbsp; Got something worth sharing? Send it to jaswanth@dbcc.edu.in &nbsp;&nbsp;&nbsp;★
+            &nbsp; Department of Computer Applications, DBCC &nbsp;&nbsp;&nbsp;★ &nbsp; We don't just study computers.
+            We bicker with them. &nbsp;&nbsp;&nbsp;★ &nbsp; Got something worth sharing? Send it to jaswanth@dbcc.edu.in
+            &nbsp;&nbsp;&nbsp;★ &nbsp; Department of Computer Applications, DBCC &nbsp;&nbsp;&nbsp;★ &nbsp; We don't
+            just study computers. We fight with them. &nbsp;&nbsp;&nbsp;
+        </span>
+    </div>
 
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">DBCC — BCA</div>
+            <nav class="nav-links">
+                <a href="{% url 'core:index' %}" class="active">Home</a>
+                <a href="{% url 'blog:blog_page' %}">Blog</a>
+                <a href="{% url 'gallery:gallery_page' %}">Gallery</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-main">
+                <div>
+                    <p class="hero-tag">Department of Computer Applications — Est. still trying (⁠ノ⁠｀⁠Д⁠´⁠)⁠ノ⁠彡⁠┻⁠━⁠┻
+                    </p>
+                    <h1 class="hero-title">
+                        We Build<br>
+                        <em>THAAANNNGSS!</em><br>
+                        <span style="display: inline-block; margin: 1rem;">ᕦ⁠⊙⁠෴⁠⊙⁠ᕤ<br></span>
+                    </h1>
+                    <p class="hero-sub">
+                        Officially: a BCA department.<br>
+                        Unofficially: a group of people who spend too much time thinking about code and not enough time
+                        doing it. You'll fit right in or you won't, and that's also fine.
+                    </p>
+                </div>
+                <div class="hero-cta">
+                    <a href="#blog" class="btn">See What We've Been Up To →</a>
+                </div>
+            </div>
+
+            <div class="hero-index">
+                <div class="hero-index-item">
+                    <span class="num">01</span>
+                    <span class="label">Blog</span>
+                    <span class="desc">Opinions. Findings. Rants dressed up as essays.</span>
+                </div>
+                <div class="hero-index-item">
+                    <span class="num">02</span>
+                    <span class="label">Gallery</span>
+                    <span class="desc">Proof that we exist outside of classrooms.</span>
+                </div>
+                <div class="hero-index-item">
+                    <span class="num">03</span>
+                    <span class="label">Contact</span>
+                    <span class="desc">We respond. Sometimes immediately. Sometimes never.</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <div class="page-container">
-
-        <!-- NAVBAR -->
-        <!-- <header class="nav-container">
-            <div class="nav-inner">
-
-                <div class="logo">
-                    <h2>Department of Computer Applications</h2>
-                </div>
-
-                <nav class="nav-links">
-                    <a href="{% url 'core:index' %}">Home</a>
-
-                    <a href="#">Gallery</a>
-                    <a href="#">Contact</a>
-                </nav>
-
+    <!-- BLOG SECTION -->
+    <section class="section" id="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Latest Posts</h2>
+                <span class="section-count">{{ recent_posts|length }} Articles</span>
             </div>
-        </header> -->
 
-
-        <!-- HERO -->
-        <section class="hero-container">
-            <div class="hero-inner">
-
-                <div class="hero-text">
-                    <span class="hero-label">Est. 2026 — Research Division</span>
-                    <h1>Welcome<br>to the<br><em>Department of Computer Applications</em></h1>
-                    <p class="hero-sub">Innovation &nbsp;•&nbsp; Research &nbsp;•&nbsp; Learning</p>
-                    <button>Explore →</button>
-                </div>
-
-                <div class="hero-index">
-                    <div class="hero-index-item">Research</div>
-                    <div class="hero-index-item">Publications</div>
-                    <div class="hero-index-item">Events</div>
-                    <div class="hero-index-item">People</div>
-                </div>
-
-            </div>
-        </section>
-
-
-        <!-- BLOG -->
-        <section class="blog-container">
-            <div class="blog-inner">
-
-                <div class="section-header">
-                    <h2>Latest Posts</h2>
-                    <span>{{ recent_posts|length }} Articles</span>
-                </div>
-
-                <div class="blog-grid">
-
-                    {% for post in recent_posts %}
-                    <div class="blog-card">
-                        <span class="card-num">00{{ forloop.counter }}</span>
-                        <h3>{{ post.title }}</h3>
-                        <p>{{ post.author }}</p>
-                        <p>{{ post.excerpt }}</p>
-                        <a href="{% url 'core:blog_detail' post.slug %}">Read More →</a>
+            <div class="blog-grid">
+                {% for post in recent_posts %}
+                <div class="blog-card">
+                    <div class="card-num">— {{ forloop.counter|stringformat:"02d" }}</div>
+                    <h3 class="card-title">{{ post.title }}</h3>
+                    <p class="card-meta">{{ post.author }} &nbsp;/&nbsp; {{ post.created_at|date:"d M Y" }}</p>
+                    <p class="card-excerpt">{{ post.excerpt }}</p>
+                    <div class="card-actions">
+                        <a class="card-link" href="{% url 'core:blog_detail' post.slug %}">Read It →</a>
+                        <button class="share-btn" data-url="{% url 'core:blog_detail' post.slug %}">⬡ Share</button>
                     </div>
-                    {% empty %}
-                    <p>No posts yet.</p>
-                    {% endfor %}
-
                 </div>
-
-                <div class="overlay" id="blog-overlay">
-                    <div class="overlay-content">
-                        <h2>All Posts</h2>
-                        <button class="btn" id="close-overlay-btn">Close</button>
-                    </div>
-                    {% for post in all_posts %}
-                    <div class="overlay-blog-card">
-                        <span class="card-num">00{{ forloop.counter }}</span>
-                        <h3>{{ post.title }}</h3>
-                        <p>{{ post.author }}</p>
-                        <p>{{ post.excerpt }}</p>
-                        <a href="{% url 'core:blog_detail' post.slug %}">Read More →</a>
-                    </div>
-                    {% endfor %}
+                {% empty %}
+                <div class="empty-state">
+                    <div class="big">...</div>
+                    <p>Nothing here yet. Someone needs to write something. Maybe that someone is you.</p>
                 </div>
-
-                <div class="section-footer">
-                    <a class="btn" href="{% url 'blog:blog_page' %}">View All Posts</a>
-                </div>
-               
-
-
+                {% endfor %}
             </div>
-        </section>
 
-
-        <!-- GALLERY -->
-        <section class="gallery-container">
-            <div class="gallery-inner">
-
-                <div class="section-header">
-                    <h2>Gallery</h2>
-                    <span>04 Images</span>
-                </div>
-
-                <div class="gallery-grid">
-                    <div class="gallery-item" data-num="IMG — 001"></div>
-                    <div class="gallery-item" data-num="IMG — 002"></div>
-                    <div class="gallery-item" data-num="IMG — 003"></div>
-                    <div class="gallery-item" data-num="IMG — 004"></div>
-                </div>
-                <div class="section-footer">
-                    <a class="btn" href="{% url 'gallery:gallery_page' %}">View All Images</a>
-                </div>
-
+            <div class="blog-grid-cta">
+                <a href="{% url 'blog:blog_page' %}" class="btn">View All Posts →</a>
             </div>
-        </section>
+        </div>
+    </section>
 
+    <!-- GALLERY SECTION -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Gallery</h2>
+                <span class="section-count">04 Images</span>
+            </div>
 
-
-
-        <!-- FOOTER -->
-        <footer class="footer-container">
-            <div class="footer-inner">
-                <p>© 2026 Department of Computer Applications</p>
-                <div class="footer-links">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Contact</a>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-num="001">
+                    <div class="gallery-item-label">IMG — 001</div>
+                </div>
+                <div class="gallery-item" data-num="002">
+                    <div class="gallery-item-label">IMG — 002</div>
+                </div>
+                <div class="gallery-item" data-num="003">
+                    <div class="gallery-item-label">IMG — 003</div>
+                </div>
+                <div class="gallery-item" data-num="004">
+                    <div class="gallery-item-label">IMG — 004</div>
                 </div>
             </div>
-        </footer>
 
-    </div>
+            <div class="blog-grid-cta">
+                <a href="{% url 'gallery:gallery_page' %}" class="btn">View All Images →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA STRIP -->
+    <section class="cta-strip">
+        <div class="container">
+            <div class="cta-inner">
+                <div>
+                    <h3 class="cta-title">Got something<br><em>worth sharing?</em></h3>
+                    <p class="cta-sub">
+                        A blog post, research update, photos from an event, or just a very strong opinion.<br>
+                        Send it to <a href="mailto:jaswanth@dbcc.edu.in">jaswanth@dbcc.edu.in</a> — we'll probably put
+                        it up.
+                    </p>
+                </div>
+                <a href="mailto:jaswanth@dbcc.edu.in" class="btn">Send Something →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">DBCC — BCA</div>
+            <span class="footer-copy">© 2026 Department of Computer Applications</span>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
 
     <script src="{% static 'js/script.js' %}"></script>
 </body>

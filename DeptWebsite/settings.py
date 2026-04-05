@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
      "collegewebsite-jf7a.onrender.com",
+     '127.0.0.1',
 ]
 
 

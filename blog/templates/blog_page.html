@@ -1,771 +1,85 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog — Department</title>
-    <style>
-        /* ── RESET ── */
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* ── TOKENS ── */
-        :root {
-            --stone: #BFC6C4;
-            --cream: #E8E2D8;
-            --green: #6F8F72;
-            --orange: #F2A65A;
-            --ink: #1a1c1b;
-            --mid: #4a4f4d;
-            --border: 2px solid #1a1c1b;
-            --thin: 1px solid #1a1c1b;
-            --mono: 'Courier New', Courier, monospace;
-            --serif: Georgia, 'Times New Roman', serif;
-        }
-
-        /* ── BASE ── */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--mono);
-            background: var(--cream);
-            color: var(--ink);
-            font-size: 14px;
-            line-height: 1.6;
-            cursor: crosshair;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* ── LAYOUT ── */
-        .wrap {
-            width: 92%;
-            max-width: 1280px;
-            margin: auto;
-        }
-
-        /* ══════════════════════════════
-           NAV
-        ══════════════════════════════ */
-        nav {
-            background: var(--ink);
-            border-bottom: var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 200;
-        }
-
-        .nav-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 54px;
-        }
-
-        .logo {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--cream);
-        }
-
-        .nav-links {
-            display: flex;
-            height: 100%;
-        }
-
-        .nav-links a {
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--stone);
-            border-left: var(--thin);
-            border-left-color: #2e3331;
-            transition: background 0.1s, color 0.1s;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            background: var(--green);
-            color: var(--cream);
-        }
-
-        /* ══════════════════════════════
-           SEARCH BAND
-        ══════════════════════════════ */
-        .search-band {
-            border-bottom: var(--border);
-            background: var(--stone);
-        }
-
-        .search-inner {
-            display: grid;
-            grid-template-columns: 1fr auto auto;
-            align-items: stretch;
-            height: 60px;
-        }
-
-        .search-input-wrap {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 0 20px;
-            border-right: var(--thin);
-        }
-
-        .search-label {
-            font-size: 9px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--mid);
-            white-space: nowrap;
-        }
-
-        .search-input {
-            flex: 1;
-            font-family: var(--mono);
-            font-size: 13px;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: var(--ink);
-            caret-color: var(--orange);
-        }
-
-        .search-input::placeholder {
-            color: #8a9290;
-        }
-
-        .search-count {
-            display: flex;
-            align-items: center;
-            padding: 0 24px;
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--mid);
-            border-right: var(--thin);
-            white-space: nowrap;
-        }
-
-        .search-clear {
-            display: flex;
-            align-items: center;
-            padding: 0 22px;
-            font-size: 10px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--mid);
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-family: var(--mono);
-            cursor: crosshair;
-        }
-
-        .search-clear:hover {
-            color: var(--orange);
-        }
-
-        /* ══════════════════════════════
-           FILTER STRIP
-        ══════════════════════════════ */
-        .filter-strip {
-            border-bottom: var(--border);
-            background: var(--cream);
-            overflow-x: auto;
-        }
-
-        .filter-inner {
-            display: flex;
-            align-items: stretch;
-            height: 44px;
-        }
-
-        .filter-label {
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            font-size: 9px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: #8a9290;
-            border-right: var(--thin);
-            white-space: nowrap;
-        }
-
-        .filter-btn {
-            display: flex;
-            align-items: center;
-            padding: 0 18px;
-            font-family: var(--mono);
-            font-size: 10px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--mid);
-            border: none;
-            border-right: var(--thin);
-            background: transparent;
-            cursor: crosshair;
-            transition: background 0.1s, color 0.1s;
-            white-space: nowrap;
-        }
-
-        .filter-btn:hover {
-            background: var(--ink);
-            color: var(--cream);
-        }
-
-        .filter-btn.active {
-            background: var(--green);
-            color: var(--cream);
-        }
-
-        .filter-sort {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            font-size: 10px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--mid);
-            border-left: var(--thin);
-            gap: 10px;
-            white-space: nowrap;
-        }
-
-        .sort-select {
-            font-family: var(--mono);
-            font-size: 10px;
-            letter-spacing: 0.1em;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: var(--ink);
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        /* ══════════════════════════════
-           MAIN GRID
-        ══════════════════════════════ */
-        .main {
-            padding: 60px 0 100px;
-        }
-
-        .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
-            border-bottom: var(--border);
-        }
-
-        .page-title {
-            font-family: var(--serif);
-            font-size: clamp(36px, 5vw, 72px);
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            line-height: 1;
-        }
-
-        .page-meta {
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--mid);
-        }
-
-        /* Blog grid */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            border-top: var(--border);
-            border-left: var(--border);
-        }
-
-        /* Featured — full width */
-        .blog-card {
-            border-right: var(--border);
-            border-bottom: var(--border);
-            background: var(--cream);
-            transition: background 0.15s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .blog-card:hover {
-            background: var(--ink);
-        }
-
-        .blog-card:hover * {
-            color: var(--cream) !important;
-        }
-
-        .blog-card:hover .card-tag {
-            border-color: var(--cream);
-        }
-
-        .blog-card:hover .read-link {
-            border-bottom-color: var(--cream);
-        }
-
-        .blog-card:hover .card-bar {
-            background: var(--green);
-        }
-
-        /* size variants */
-        .card-xl {
-            grid-column: span 8;
-        }
-
-        .card-md {
-            grid-column: span 4;
-        }
-
-        .card-sm {
-            grid-column: span 4;
-        }
-
-        .card-wide {
-            grid-column: span 6;
-        }
-
-        .card-bar {
-            height: 4px;
-            background: var(--orange);
-            width: 100%;
-        }
-
-        .card-inner {
-            padding: 28px 28px 32px;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-
-        .card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-
-        .card-num {
-            font-size: 9px;
-            letter-spacing: 0.3em;
-            color: #8a9290;
-        }
-
-        .card-tag {
-            font-size: 9px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            padding: 3px 8px;
-            border: 1px solid var(--stone);
-            color: var(--mid);
-        }
-
-        .card-title {
-            font-family: var(--serif);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.15;
-            margin-bottom: 14px;
-            color: var(--ink);
-        }
-
-        .card-xl .card-title {
-            font-size: clamp(22px, 2.5vw, 36px);
-        }
-
-        .card-md .card-title {
-            font-size: 20px;
-        }
-
-        .card-sm .card-title {
-            font-size: 17px;
-        }
-
-        .card-wide .card-title {
-            font-size: 22px;
-        }
-
-        .card-excerpt {
-            font-size: 13px;
-            line-height: 1.65;
-            color: var(--mid);
-            flex: 1;
-            margin-bottom: 24px;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 16px;
-            border-top: var(--thin);
-        }
-
-        .card-date {
-            font-size: 10px;
-            letter-spacing: 0.15em;
-            color: #8a9290;
-        }
-
-        .read-link {
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--ink);
-            padding-bottom: 1px;
-            border-bottom: 1px solid var(--ink);
-        }
-
-        /* ── no results ── */
-        .no-results {
-            grid-column: span 12;
-            padding: 80px 40px;
-            text-align: center;
-            border-right: var(--border);
-            border-bottom: var(--border);
-        }
-
-        .no-results p {
-            font-size: 13px;
-            color: var(--mid);
-            letter-spacing: 0.1em;
-        }
-
-        /* ══════════════════════════════
-           PAGINATION
-        ══════════════════════════════ */
-        .pagination {
-            display: flex;
-            align-items: center;
-            margin-top: 48px;
-            border: var(--border);
-        }
-
-        .page-btn {
-            display: flex;
-            align-items: center;
-            padding: 14px 22px;
-            font-family: var(--mono);
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            border: none;
-            border-right: var(--thin);
-            background: transparent;
-            color: var(--ink);
-            cursor: crosshair;
-            transition: background 0.1s, color 0.1s;
-        }
-
-        .page-btn:hover {
-            background: var(--ink);
-            color: var(--cream);
-        }
-
-        .page-btn.current {
-            background: var(--green);
-            color: var(--cream);
-        }
-
-        .page-btn:last-child {
-            border-right: none;
-            border-left: var(--thin);
-            margin-left: auto;
-        }
-
-        /* ══════════════════════════════
-           CHAT BUTTON
-        ══════════════════════════════ */
-        .chat-btn {
-            position: fixed;
-            bottom: 32px;
-            right: 32px;
-            z-index: 300;
-        }
-
-        .chat-trigger {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0 20px 0 0;
-            height: 52px;
-            background: var(--ink);
-            border: var(--border);
-            cursor: crosshair;
-            transition: background 0.1s;
-        }
-
-        .chat-trigger:hover {
-            background: var(--green);
-        }
-
-        .chat-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 52px;
-            height: 52px;
-            border-right: var(--border);
-            flex-shrink: 0;
-        }
-
-        .chat-icon svg {
-            stroke: var(--cream);
-        }
-
-        .chat-label {
-            font-family: var(--mono);
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--cream);
-        }
-
-        .chat-dot {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            width: 10px;
-            height: 10px;
-            background: var(--orange);
-            border: 2px solid var(--cream);
-        }
-
-        /* ══════════════════════════════
-           FOOTER
-        ══════════════════════════════ */
-        footer {
-            background: var(--ink);
-            border-top: var(--border);
-        }
-
-        .footer-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 52px;
-        }
-
-        .footer-inner p {
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #4a4f4d;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-        }
-
-        .footer-links a {
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #4a4f4d;
-            transition: color 0.1s;
-        }
-
-        .footer-links a:hover {
-            color: var(--cream);
-        }
-
-        /* ══════════════════════════════
-           RESPONSIVE
-        ══════════════════════════════ */
-        @media (max-width: 900px) {
-
-            .card-xl,
-            .card-md,
-            .card-sm,
-            .card-wide {
-                grid-column: span 12;
-            }
-
-            .search-inner {
-                grid-template-columns: 1fr auto;
-            }
-
-            .search-count {
-                display: none;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .nav-links a {
-                padding: 0 12px;
-                font-size: 9px;
-            }
-
-            .chat-label {
-                display: none;
-            }
-
-            .chat-trigger {
-                padding: 0;
-                width: 52px;
-                justify-content: center;
-            }
-
-            .chat-icon {
-                border-right: none;
-            }
-        }
-    </style>
+    <title>Blog — DBCC BCA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
 
-    <!-- ── NAV ── -->
-    <nav>
-        <div class="wrap nav-inner">
-            <div class="logo">Department of Computer Applications</div>
-            <div class="nav-links">
-                <a href="#">Home</a>
-                <a href="#" class="active">Blog</a>
-                <a href="#">Gallery</a>
+    <!-- ANNOUNCE BAR -->
+    <div class="announce-bar">
+        <span class="announce-track">
+            &nbsp;&nbsp;&nbsp;★ &nbsp; Read something good? Share it. &nbsp;&nbsp;&nbsp;★ &nbsp; Want to write?
+            jaswanth@dbcc.edu.in &nbsp;&nbsp;&nbsp;★ &nbsp; Department of Computer Applications, DBCC
+            &nbsp;&nbsp;&nbsp;★ &nbsp; Read something good? Share it. &nbsp;&nbsp;&nbsp;★ &nbsp; Want to write?
+            jaswanth@dbcc.edu.in &nbsp;&nbsp;&nbsp;★ &nbsp; Department of Computer Applications, DBCC &nbsp;&nbsp;&nbsp;
+        </span>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">DBCC — BCA</div>
+            <nav class="nav-links">
+                <a href="{% url 'core:index' %}">Home</a>
+                <a href="{% url 'blog:blog_page' %}" class="active">Blog</a>
+                <a href="{% url 'gallery:gallery_page' %}">Gallery</a>
                 <a href="#">Contact</a>
-            </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- ── SEARCH BAND ── -->
-    <div class="search-band">
-        <div class="wrap search-inner">
-            <div class="search-input-wrap">
-                <span class="search-label">Search</span>
-                <input class="search-input" id="searchInput" type="text" placeholder="Type to filter posts..."
-                    autocomplete="off" spellcheck="false">
-            </div>
-            <div class="search-count" id="searchCount">12 Posts</div>
-            <button class="search-clear" id="searchClear" onclick="clearSearch()">Clear ×</button>
+    <!-- PAGE HERO -->
+    <div style="border-bottom: 2px solid var(--ink);">
+        <div class="page-hero">
+            <h1 class="page-hero-title">The Blog.<br>Read It.</h1>
+            <p class="page-hero-sub">
+                Essays, findings, opinions, half-baked theories — all from people who are supposed to be studying.
+                &nbsp;/&nbsp; {{ posts|length }} articles total.
+            </p>
         </div>
     </div>
 
-    <!-- ── FILTER STRIP ── -->
-    <div class="filter-strip">
-        <div class="wrap filter-inner">
-            <span class="filter-label">Filter</span>
-            <button class="filter-btn active" onclick="setFilter(this, 'all')">All</button>
-            <button class="filter-btn" onclick="setFilter(this, 'research')">Research</button>
-            <button class="filter-btn" onclick="setFilter(this, 'engineering')">Engineering</button>
-            <button class="filter-btn" onclick="setFilter(this, 'design')">Design</button>
-            <button class="filter-btn" onclick="setFilter(this, 'events')">Events</button>
-            <div class="filter-sort">
-                <span>Sort</span>
-                <select class="sort-select" id="sortSelect" onchange="sortCards()">
-                    <option value="newest">Newest</option>
-                    <option value="oldest">Oldest</option>
-                    <option value="az">A → Z</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <!-- ── MAIN ── -->
-    <main class="main">
-        <div class="wrap">
-
-            <div class="page-header">
-                <h1 class="page-title">All Posts</h1>
-                <span class="page-meta" id="visibleCount">12 Articles</span>
-            </div>
-
-            <div class="blog-grid" id="blogGrid">
-
-                <!-- <article class="blog-card card-wide" data-tag="design" data-title="When Whitespace Does the Work"
-                    data-date="2025-12-05">
-                    <div class="card-bar" style="background: var(--green);"></div>
-                    <div class="card-inner">
-                        <div class="card-top"> <span class="card-num">012</span> <span class="card-tag">Design</span>
-                        </div>
-                        <h2 class="card-title">When Whitespace Does the Work</h2>
-                        <p class="card-excerpt">Empty space is not wasted space. Learning to let a layout breathe is the
-                            hardest skill in visual design.</p>
-                        <div class="card-footer"> <span class="card-date">05 Dec 2025</span> <a href="#"
-                                class="read-link">Read →</a> </div>
+    <!-- BLOG GRID -->
+    <section class="section">
+        <div class="container">
+            <div class="blog-grid">
+                {% for post in posts %}
+                <div class="blog-card">
+                    <div class="card-num">— {{ forloop.counter|stringformat:"02d" }}</div>
+                    <h3 class="card-title">{{ post.title }}</h3>
+                    <p class="card-meta">{{ post.author }} &nbsp;/&nbsp; {{ post.created_at|date:"d M Y" }}</p>
+                    <p class="card-excerpt">{{ post.excerpt }}</p>
+                    <div class="card-actions">
+                        <a class="card-link" href="{% url 'core:blog_detail' post.slug %}">Read It →</a>
+                        <button class="share-btn" data-url="{% url 'core:blog_detail' post.slug %}">⬡ Share</button>
                     </div>
-                </article> -->
-                {% for post in all_posts %}
-                <article class="blog-card card-wide" data-tag="{{ post.category }}" data-title="{{ post.title }}"
-                    data-date="{{ post.date }}">
-                    <div class="card-bar" style="background: var(--green);"></div>
-                    <div class="card-inner">
-                        <div class="card-top">
-                            <span class="card-num">{{ forloop.counter }}</span>
-                            <span class="card-tag">{{ post.category }}</span>
-                        </div>
-
-                        <h2 class="card-title">{{ post.title }}</h2>
-                        <p class="card-excerpt">{{ post.excerpt }}</p>
-
-                        <div class="card-footer">
-                            <span class="card-date">{{ post.created_at|date:"d M Y" }}</span>
-                            <a href="{% url 'blog:blog_detail' post.slug %}" class="read-link">Read →</a>
-                        </div>
-                    </div>
-                </article>
-                {% endfor %}
-
-                <!-- No results state (hidden by default) -->
-                <div class="no-results" id="noResults" style="display:none;">
-                    <p>No posts match "<span id="noResultsTerm"></span>"</p>
                 </div>
-
-            </div><!-- /blog-grid -->
-
-            <!-- Pagination -->
-            <div class="pagination">
-                <button class="page-btn current">01</button>
-                <button class="page-btn">02</button>
-                <button class="page-btn">03</button>
-                <button class="page-btn">→ Next</button>
+                {% empty %}
+                <div class="empty-state">
+                    <div class="big">¯\_(ツ)_/¯</div>
+                    <p>No posts yet. We know the silence is uncomfortable, someone will fix it.</p>
+                </div>
+                {% endfor %}
             </div>
-
         </div>
-    </main>
+    </section>
 
-    <!-- ── CHAT BTN ── -->
-    <div class="chat-btn">
-        <button class="chat-trigger" style="position:relative;">
-            <div class="chat-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="square">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                </svg>
-            </div>
-            <span class="chat-label">Ask a question</span>
-            <div class="chat-dot"></div>
-        </button>
-    </div>
-
-    <!-- ── FOOTER ── -->
-    <footer>
-        <div class="wrap footer-inner">
-            <p>© 2026 Department Website</p>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">DBCC — BCA</div>
+            <span class="footer-copy">© 2026 Department of Computer Applications</span>
             <div class="footer-links">
                 <a href="#">Privacy</a>
                 <a href="#">Terms</a>
@@ -773,79 +87,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        const input = document.getElementById('searchInput');
-        const countEl = document.getElementById('searchCount');
-        const visibleEl = document.getElementById('visibleCount');
-        const noResults = document.getElementById('noResults');
-        const noResultsTerm = document.getElementById('noResultsTerm');
-        const grid = document.getElementById('blogGrid');
-
-        function getCards() {
-            return Array.from(grid.querySelectorAll('.blog-card'));
-        }
-
-        function updateCounts(visible, total) {
-            const label = `${visible} / ${total} Articles`;
-            countEl.textContent = `${visible} Posts`;
-            visibleEl.textContent = label;
-        }
-
-        function applyFilters() {
-            const query = input.value.toLowerCase().trim();
-            const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
-            const cards = getCards();
-            let visible = 0;
-
-            cards.forEach(card => {
-                const title = (card.dataset.title || '').toLowerCase();
-                const tag = (card.dataset.tag || '').toLowerCase();
-                const matchesSearch = !query || title.includes(query) || tag.includes(query);
-                const matchesFilter = activeFilter === 'all' || tag === activeFilter;
-                const show = matchesSearch && matchesFilter;
-                card.style.display = show ? '' : 'none';
-                if (show) visible++;
-            });
-
-            noResults.style.display = visible === 0 ? '' : 'none';
-            if (visible === 0) noResultsTerm.textContent = query;
-            updateCounts(visible, cards.length);
-        }
-
-        function setFilter(btn, filter) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            btn.dataset.filter = filter;
-            applyFilters();
-        }
-
-        // Attach filter data attrs on load
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.dataset.filter = btn.textContent.trim().toLowerCase();
-        });
-        document.querySelector('.filter-btn.active').dataset.filter = 'all';
-
-        function clearSearch() {
-            input.value = '';
-            input.focus();
-            applyFilters();
-        }
-
-        function sortCards() {
-            const val = document.getElementById('sortSelect').value;
-            const cards = getCards();
-            const sorted = cards.sort((a, b) => {
-                if (val === 'newest') return new Date(b.dataset.date) - new Date(a.dataset.date);
-                if (val === 'oldest') return new Date(a.dataset.date) - new Date(b.dataset.date);
-                if (val === 'az') return a.dataset.title.localeCompare(b.dataset.title);
-            });
-            sorted.forEach(c => grid.insertBefore(c, noResults));
-        }
-
-        input.addEventListener('input', applyFilters);
-        updateCounts(12, 12);
-    </script>
 
 </body>
 

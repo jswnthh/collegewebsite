@@ -1,137 +1,98 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ post.title }} — Department of Computer Applications Website</title>
+    <title>{{ post.title }} — DBCC BCA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-
 <body>
 
-    <div class="page-container">
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">DBCC — BCA</div>
+            <nav class="nav-links">
+                <a href="{% url 'core:index' %}">Home</a>
+                <a href="{% url 'blog:blog_page' %}" class="active">Blog</a>
+                <a href="{% url 'gallery:gallery_page' %}">Gallery</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
 
-        <!-- NAVBAR -->
-        <header class="nav-container">
-            <div class="nav-inner">
-
-                <div class="logo">
-                    <h2>Department of Computer Applications</h2>
-                </div>
-
-                <nav class="nav-links">
-                    <a href="{% url 'core:index' %}">Home</a>
-                    <a href="#">Gallery</a>
-                    <a href="#">Contact</a>
-                </nav>
-
+    <!-- ARTICLE HEADER -->
+    <div class="article-header">
+        <div class="article-header-main">
+            <div class="article-label">
+                <span>Blog</span>
+                <span>{{ post.created_at|date:"d M Y" }}</span>
             </div>
-        </header>
+            <h1 class="article-title">{{ post.title }}</h1>
 
+            {% if post.excerpt %}
+            <p style="font-family: var(--mono); font-size: 14px; color: #666; line-height: 1.8; max-width: 600px;">
+                {{ post.excerpt }}
+            </p>
+            {% endif %}
+        </div>
 
-        <!-- ARTICLE -->
-        <section class="article-container">
-            <div class="article-inner">
-
-                <!-- Header band: title + meta sidebar -->
-                <div class="article-header">
-                    <div class="article-header-main">
-                        <h1>{{ post.title }}</h1>
-                        <div class="article-meta-sidebar">
-                            <div class="meta-row">
-                                <span class="meta-label">Published</span>
-                                <span class="meta-value">{{ post.created_at|date:"d M Y" }}</span>
-                            </div>
-                            <div class="meta-row">
-                                <span class="meta-label">Author</span>
-                                <span class="meta-value">{{ post.author }}</span>
-                            </div>
-                            <!-- <div class="meta-row">
-                                <span class="meta-label">Section</span>
-                                <span class="meta-value">Research</span>
-                            </div> -->
-                            <!-- <div class="meta-row">
-                                <span class="meta-label">Slug</span>
-                                <span class="meta-value">{{ post.slug }}</span>
-                            </div> -->
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-
-                <!-- Body + sidebar -->
-                <div class="article-body-wrap">
-
-                    <article class="article-body">
-
-                        {% if post.image %}
-                        <div class="article-image">
-                            <img src="{{ post.image.url }}" alt="{{ post.title }}">
-                        </div>
-                        {% endif %}
-
-                        {% if post.excerpt %}
-                        <p class="article-excerpt">{{ post.excerpt }}</p>
-                        {% endif %}
-
-                        <div class="article-content">
-                            {{ post.content|safe }}
-                        </div>
-
-                    </article>
-
-                    <aside class="article-sidebar">
-
-                        <div class="sidebar-section">
-                            <span class="sidebar-label">Topics</span>
-                            <a href="#" class="sidebar-tag">Research</a>
-                            <a href="#" class="sidebar-tag">Department of Computer Applications</a>
-                            <a href="#" class="sidebar-tag">2026</a>
-                        </div>
-
-                        <div class="sidebar-section">
-                            <span class="sidebar-label">Related Posts</span>
-                            {% for related in related_posts %}
-                            <a href="#" class="related-link">{{ related.title }}</a>
-                            {% empty %}
-                            {% endfor %}
-                        </div>
-
-                        <div class="sidebar-section">
-                            <span class="sidebar-label">Share</span>
-                            <a href="#" class="share-btn">↗ Copy Link</a>
-                            <a href="#" class="share-btn">↗ Email</a>
-                        </div>
-
-                    </aside>
-
-                </div>
-                <!-- /article-body-wrap -->
-
+        <div class="article-meta-sidebar">
+            <div class="meta-block">
+                <div class="meta-label">Written By</div>
+                <div class="meta-value">{{ post.author }}</div>
             </div>
-        </section>
-
-
-        <!-- FOOTER -->
-        <footer class="footer-container">
-            <div class="footer-inner">
-                <p>© 2026 Department of Computer Applications Website</p>
-                <div class="footer-links">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Contact</a>
-                </div>
+            <div class="meta-block">
+                <div class="meta-label">Published</div>
+                <div class="meta-value">{{ post.created_at|date:"d M Y" }}</div>
             </div>
-        </footer>
+            <div class="meta-block">
+                <div class="meta-label">Department</div>
+                <div class="meta-value">Computer Applications</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ARTICLE BODY -->
+    <div class="article-body-wrap">
+
+        <div class="article-body">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width:100%; margin-bottom: 32px;">
+            {% endif %}
+
+            {{ post.content|safe }}
+        </div>
+
+        <div class="article-sidebar">
+            <div class="sidebar-title">What Next?</div>
+
+            <p style="font-family: var(--mono); font-size: 12px; color: #666; line-height: 1.8; margin-bottom: 24px;">
+                You read it. Now go do something with it. Or just go read another one.
+            </p>
+
+            <a href="{% url 'blog:blog_page' %}" class="btn" style="width: 100%; text-align: center; display: block; margin-bottom: 12px;">← All Posts</a>
+            <a href="{% url 'core:index' %}" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Home</a>
+        </div>
 
     </div>
 
-</body>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">DBCC — BCA</div>
+            <span class="footer-copy">© 2026 Department of Computer Applications</span>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
 
+</body>
 </html>
